@@ -11,6 +11,13 @@ export default defineNuxtConfig({
             }
         ]
     ],
+    runtimeConfig: {
+        public: {
+            severProtocol: '',
+            severDomain: '',
+            severPort: ''
+        }
+    },
     build: {
         transpile: ['element-plus/es'],
     },

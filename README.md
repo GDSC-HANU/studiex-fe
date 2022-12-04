@@ -1,42 +1,48 @@
-# Nuxt 3 Minimal Starter
+# StudyEx
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> GDSC HANU x CSE
+---
+## Technology use
+*These are the main language & library use across the project. Note that this project was built base on standard structure of nuxt 3 with command `npx nuxi init`.*
 
-## Setup
+- Nuxt 3 (vue 3 & TS & Composition api)
+- Typescript
+- Element plus
+- Tailwind
 
-Make sure to install the dependencies:
+## Necessary tool
+*It's highly recommend to use these tool for development. You can also use another tool in you prefer.*
 
-```bash
-# yarn
-yarn install
+- Browser (chrome, firefox, edge, etc) with suitable [devtool](https://devtools.vuejs.org/guide/installation.html)
+- VSCode (Vue Language Feature(volar) + Tailwind CSS IntelliSense)
+- Yarn package manager global installation 👉 `npm install --global yarn`
 
-# npm
-npm install
+## Development
 
-# pnpm
-pnpm install --shamefully-hoist
-```
+### 📄 New project
+*Please follow this guild to have project ready for develop.*
 
-## Development Server
+*Oh, and you must have node latest version installed.*
 
-Start the development server on http://localhost:3000
+1. Clone the development branch of this project
+    ```
+    git clone -b develop https://github.com/GDSC-HANU/StudyEx.git
+    ```
+2. In the root folder, make a `.env` file and paste these content
+    ```
+    NUXT_PUBLIC_SEVER_PROTOCOL=https://
+    NUXT_PUBLIC_SEVER_DOMAIN=012.34.56.789
+    NUXT_PUBLIC_SEVER_PORT=3000
+    ```
+3. Install all the necessary package
+    ```
+    yarn
+    ```
+4. And start the development sever!
+    ```
+    yarn dev
+    ```
+### 📑 Update Project
+## Testing
 
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Deployment
