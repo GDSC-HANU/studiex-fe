@@ -2,7 +2,7 @@
   <el-container class="container">
     <el-header class="flex justify-between mb-12" style="width=100vw">
       <h1 class="text-5xl font-semibold mb-10">Supply</h1>
-      <NuxtLink to="./supply/edit">
+      <NuxtLink to="/profile/supply/edit">
         <el-button class="mt-7" type="primary" :icon="EditPen">Edit</el-button>
       </NuxtLink>
     </el-header>
@@ -14,38 +14,26 @@
         class="flex flex-col xl:flex-row xl:justify-between"
       >
         <div class="leftForm">
-          <!-- Subject -->
           <el-form-item label="Subject" size="large" class="w-80">
             English
-            <!-- <el-select
-              v-model="data.subjects[0]"
-              placeholder="Select your type"
-              disabled
-            >
-              <el-option
-                v-for="type in data.subjects"
-                :label="type"
-                :value="type"
-              />
-            </el-select> -->
           </el-form-item>
 
-          <!-- English type -->
           <el-form-item label="English type" size="large" class="w-80">
-            <el-select
-              v-model="data.types[0]"
-              placeholder="Select your type"
-              disabled
-            >
-              <el-option
-                v-for="type in data.types"
-                :label="type"
-                :value="type"
-              />
-            </el-select>
+            <ClientOnly>
+              <el-select
+                v-model="data.types[0]"
+                placeholder="Select your type"
+                disabled
+              >
+                <el-option
+                  v-for="type in data.types"
+                  :label="type"
+                  :value="type"
+                />
+              </el-select>
+            </ClientOnly>
           </el-form-item>
 
-          <!-- skills -->
           <el-form-item label="Skills" size="large">
             <span class="flex-col">
               <el-checkbox :indeterminate="true" disabled
@@ -64,25 +52,26 @@
         </div>
 
         <div class="rightForm">
-          <!-- Ielts -->
           <el-form-item label="IELTS" size="large">
             <span class="flex flex-col">
               <div class="w-72 sm:w-96" v-for="ie in data.ielts">
                 <span class="toeicSkillName">{{ ie.skillname }}</span>
-                <el-slider
-                  style="
-                    --el-slider-runway-bg-color: #fff;
-                    --el-slider-stop-bg-color: #409eff;
-                  "
-                  v-model="ie.score"
-                  step="0.5"
-                  :min="1"
-                  :max="9"
-                  show-input
-                  show-stops
-                  input-size="small"
-                  disabled
-                />
+                <ClientOnly>
+                  <el-slider
+                    style="
+                      --el-slider-runway-bg-color: #fff;
+                      --el-slider-stop-bg-color: #409eff;
+                    "
+                    v-model="ie.score"
+                    :step="0.5"
+                    :min="1"
+                    :max="9"
+                    show-input
+                    show-stops
+                    input-size="small"
+                    disabled
+                  />
+                </ClientOnly>
               </div>
               <div class="w-72 sm:w-96">
                 <span class="toeicSkillName">Overall</span>
@@ -98,15 +87,12 @@
             </span>
           </el-form-item>
 
-          <!-- time study -->
           <el-form-item label="Study time" size="large" class="mt-12">
             <el-timeline>
               <el-timeline-item
                 style="--el-timeline-node-color: #fff"
                 v-for="(activity, index) in data.timelines"
                 :key="index"
-                :type="activity.type"
-                :size="activity.size"
                 :timestamp="activity.timestamp"
               >
                 {{ activity.content }}

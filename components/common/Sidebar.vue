@@ -46,7 +46,6 @@ const props = defineProps({
 		required: true
 	}
 })
-console.log(props.sidebar);
 
 const currentRoute = computed(() => props.sidebar.findIndex(sidebarItem => {
 	if (sidebarItem.path === '/')
