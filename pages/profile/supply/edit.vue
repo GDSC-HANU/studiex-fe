@@ -1,10 +1,15 @@
 <template>
-  <el-container class="container">
+  <el-container>
     <el-header class="flex justify-between mb-12" style="width=100vw">
       <h1 class="text-5xl font-semibold mb-10">Supply</h1>
-      <NuxtLink to="./supply/edit">
-        <el-button class="mt-7" type="primary" :icon="EditPen">Edit</el-button>
-      </NuxtLink>
+      <el-form-item>
+        <el-button class="mr-5 mt-1" type="primary" @click="handleUpdate"
+          >Update
+        </el-button>
+        <NuxtLink to="./">
+          <el-button>Cancel</el-button>
+        </NuxtLink>
+      </el-form-item>
     </el-header>
     <el-main style="width: 100%">
       <el-form
@@ -20,7 +25,7 @@
             <!-- <el-select
               v-model="data.subjects[0]"
               placeholder="Select your type"
-              disabled
+              :disabled="isDisabled"
             >
               <el-option
                 v-for="type in data.subjects"
@@ -31,11 +36,11 @@
           </el-form-item>
 
           <!-- English type -->
-          <el-form-item label="English type" size="large" class="w-80">
+          <el-form-item label="Type" size="large" class="w-80">
             <el-select
               v-model="data.types[0]"
               placeholder="Select your type"
-              disabled
+              :disabled="isDisabled"
             >
               <el-option
                 v-for="type in data.types"
@@ -48,10 +53,18 @@
           <!-- skills -->
           <el-form-item label="Skills" size="large">
             <span class="flex-col">
-              <el-checkbox :indeterminate="true" disabled
+              <el-checkbox
+                v-model="isCheckAll"
+                :indeterminate="isIndeterminate"
+                @change="handleCheckAllChange"
+                :disabled="isDisabled"
                 >Check all</el-checkbox
               >
-              <el-checkbox-group v-model="data.checkedSkills" disabled>
+              <el-checkbox-group
+                v-model="data.checkedSkills"
+                @change="handleCheckedSkills"
+                :disabled="isDisabled"
+              >
                 <el-checkbox
                   v-for="phakeData in data.skills"
                   :key="phakeData"
@@ -68,7 +81,7 @@
           <el-form-item label="IELTS" size="large">
             <span class="flex flex-col">
               <div class="w-72 sm:w-96" v-for="ie in data.ielts">
-                <span class="toeicSkillName">{{ ie.skillname }}</span>
+                <span>{{ ie.skillname }}</span>
                 <el-slider
                   style="
                     --el-slider-runway-bg-color: #fff;
@@ -81,11 +94,11 @@
                   show-input
                   show-stops
                   input-size="small"
-                  disabled
+                  :disabled="isDisabled"
                 />
               </div>
               <div class="w-72 sm:w-96">
-                <span class="toeicSkillName">Overall</span>
+                <span>Overall</span>
                 <el-progress
                   class="text-xl"
                   :text-inside="true"
@@ -99,11 +112,33 @@
           </el-form-item>
 
           <!-- time study -->
-          <el-form-item label="Study time" size="large" class="mt-12">
+          <el-form-item label="Timeline Study">
+            <div :class="{ hidden: isDisabled }" class="flex flex-col w-64">
+              <div class="picker">
+                <label for="">Event name</label>
+                <el-input class="mb-6" v-model="newData.content" />
+
+                <label for="">Event Date</label>
+                <el-date-picker
+                  class="mb-6"
+                  v-model="newData.timestamp"
+                  type="date"
+                  placeholder="Pick a date"
+                  style="width: 100%"
+                />
+                <el-button class="mb-6" type="primary" @click="addTimeline">
+                  Add
+                </el-button>
+              </div>
+            </div>
+          </el-form-item>
+
+          <!-- timeline -->
+          <el-form-item>
             <el-timeline>
               <el-timeline-item
                 style="--el-timeline-node-color: #fff"
-                v-for="(activity, index) in data.timelines"
+                v-for="(activity, index) in newData.timelines"
                 :key="index"
                 :type="activity.type"
                 :size="activity.size"
@@ -143,16 +178,18 @@ import {
   ElRow,
   ElCol,
   ElProgress,
-  ElIcon,
+  ElDatePicker,
 } from "element-plus";
 import { over } from "lodash";
 import { EditPen } from "@element-plus/icons-vue";
+import router from "nuxt/dist/pages/runtime/router";
 
 const input = ref("");
+let isDisabled = ref(false);
+const isCheckAll = ref(false);
+const isIndeterminate = ref(true);
 
-const subject = ref("VueJS");
-
-let data = reactive({
+const data = reactive({
   skills: ["Reading", "Writing", "Speaking", "Listening"],
   checkedSkills: ["Speaking", "Listening"],
   types: ["Technical English", "English communication"],
@@ -176,14 +213,8 @@ let data = reactive({
   ],
   timelines: [
     {
-      content: "Learning English in school",
-      timestamp: "2008-01-01",
-      size: "large",
-      type: "primary",
-    },
-    {
-      content: "Learning English in English Center",
-      timestamp: "2019-01-01",
+      content: "Take IELTS contest",
+      timestamp: "2022-01-01",
       size: "large",
       type: "primary",
     },
@@ -194,12 +225,27 @@ let data = reactive({
       type: "primary",
     },
     {
-      content: "Take IELTS contest",
-      timestamp: "2022-01-01",
+      content: "Learning English in English Center",
+      timestamp: "2019-01-01",
+      size: "large",
+      type: "primary",
+    },
+    {
+      content: "Learning English in school",
+      timestamp: "2008-01-01",
       size: "large",
       type: "primary",
     },
   ],
+});
+
+const newData = reactive({
+  type: "",
+  content: "",
+  timestamp: "",
+  timelines: [],
+  checkedSkills: data.checkedSkills,
+  ietls: data.ielts,
 });
 
 const getIEOverall = computed(() => {
@@ -207,9 +253,40 @@ const getIEOverall = computed(() => {
   data.ielts.forEach((item) => {
     total += item.score;
   });
-  const overall = Math.floor(total / 4);
+  const overall = Math.round((total / 4.0) * 2) / 2;
   return overall;
 });
+
+function onSubmit() {
+  isDisabled = ref(true);
+}
+
+function addTimeline() {
+  const date = new Date(newData.timestamp);
+  const timeline = {
+    content: newData.content,
+    timestamp: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+    size: "large",
+    type: "primary",
+  };
+  newData.timelines.push(timeline);
+}
+
+const handleCheckAllChange = (val: boolean) => {
+  data.checkedSkills = val ? data.skills : [];
+  isIndeterminate.value = false;
+};
+
+const handleCheckedSkills = (value: string[]) => {
+  const checkedCount = value.length;
+  isCheckAll.value = checkedCount === data.skills.length;
+  isIndeterminate.value = checkedCount > 0 && checkedCount < data.skills.length;
+};
+
+const handleUpdate = () => {
+  isDisabled = ref(true);
+  console.log(isDisabled);
+};
 </script>
 
 <style scoped></style>
