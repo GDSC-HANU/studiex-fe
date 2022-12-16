@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@heroicons/vue": "^2.0.13",
     "@nuxtjs/tailwindcss": "^6.1.3",
     "@pinia/nuxt": "^0.4.6",
     "axios": "^1.2.0",

@@ -2,7 +2,7 @@
 	<div :class="`relative bg-slate-800 text-slate-50 h-full transition-all`">
 		<div class="bg-slate-900 h-14 flex items-center p-2 mb-2">
 			<el-image class="block h-full" src="../../assets/imgs/Tailwind_logo.png" :fit="`fill`" />
-			<h1 class="grow text-center text-xl">StudyEX</h1>
+			<h1 class="grow text-center text-xl">StudieX</h1>
 		</div>
 		<ul>
 			<template v-for="(route, index) in sidebar">
@@ -34,7 +34,15 @@ const props = defineProps({
 	}
 })
 
-const currentRoute = computed(() => props.sidebar.findIndex(sidebarItem => route.path.startsWith(sidebarItem.path)))
+const currentRoute = computed(() => props.sidebar.findIndex(sidebarItem => {
+	if (sidebarItem.path === '/')
+		if (route.path === '/')
+			return true
+		else
+			return false
+	else
+		return route.path.startsWith(sidebarItem.path)
+}))
 
 </script>
 

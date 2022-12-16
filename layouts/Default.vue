@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ElContainer, ElAside, ElHeader, ElMain, ElAvatar, ElButton, ElDrawer } from 'element-plus'
+import { ElContainer, ElAside, ElHeader, ElMain, ElAvatar, ElDrawer } from 'element-plus'
 
 const drawer = ref(false)
 
@@ -66,5 +66,9 @@ const sidebar = reactive([
 
 .el-aside {
 	@apply overflow-visible z-50;
+}
+
+.el-main {
+	@apply p-0 md:p-5;
 }
 </style>
