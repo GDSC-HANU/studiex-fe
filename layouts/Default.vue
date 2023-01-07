@@ -10,7 +10,7 @@
 		</el-aside>
 		<el-container>
 			<el-header>
-				<i class="cursor-pointer p-2 rounded-full hover:bg-slate-200 active:bg-slate-300 transition mr-auto md:hidden"
+				<i class="icon-button mr-auto md:hidden"
 					@click="drawer = !drawer">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
 						stroke="currentColor" class="w-6 h-6">
@@ -29,7 +29,9 @@
 					src="https://img.freepik.com/free-photo/beautiful-female-face-perfect-clean-skin-face-white_155003-32164.jpg?w=360" />
 			</el-header>
 			<el-main class="bg-slate-200">
-				<slot></slot>
+				<div class="max-w-7xl m-auto">
+					<slot></slot>
+				</div>
 			</el-main>
 		</el-container>
 	</el-container>
@@ -61,7 +63,7 @@ const sidebar = reactive([
 
 <style scoped>
 .el-header {
-	@apply h-14 bg-slate-100 flex items-center gap-5 justify-end px-3 z-10 shadow;
+	@apply h-14 bg-slate-50 flex items-center gap-5 justify-end px-3 z-10 shadow;
 }
 
 .el-aside {

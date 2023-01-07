@@ -1,0 +1,80 @@
+.markdown h1 {
+  @apply text-3xl font-bold my-3;
+}
+
+.markdown h2 {
+  @apply text-2xl font-bold my-3;
+}
+
+.markdown h3 {
+  @apply text-xl font-bold my-3;
+}
+
+.markdown h4 {
+  @apply text-lg font-bold my-3;
+}
+
+.markdown h5 {
+  @apply text-base font-bold my-3;
+}
+
+.markdown h6 {
+  @apply text-sm font-bold my-3;
+}
+
+.markdown p {
+  @apply my-3;
+}
+
+.markdown a {
+  @apply text-sky-600 hover:underline;
+}
+
+.markdown hr {
+  @apply border-t border-slate-300 my-3;
+}
+
+.markdown blockquote {
+  @apply border-l-8 border-slate-400 p-3 text-slate-600 bg-slate-100 italic my-3;
+}
+
+.markdown code {
+  @apply bg-slate-200 p-1 rounded;
+}
+
+.markdown pre {
+  @apply p-3 my-3 bg-slate-200 rounded;
+}
+
+.markdown ol {
+  @apply my-3 ml-6 list-decimal;
+}
+
+.markdown ul {
+  @apply my-3 ml-6 list-disc;
+}
+
+.markdown ul ul {
+  @apply my-0;
+  list-style-type: circle;
+}
+
+.markdown ul ul ul{
+  list-style-type: square;
+}
+
+.markdown table {
+  @apply my-3 border-separate border-spacing-0 border border-slate-300 rounded-lg overflow-hidden;
+}
+
+.markdown table th, .markdown table td {
+  @apply p-3 border-r border-r-slate-300 last:border-r-0;
+}
+
+.markdown table th {
+  @apply border-b border-b-slate-300 bg-slate-50;
+}
+
+.markdown table tr {
+  @apply odd:bg-slate-100;
+}

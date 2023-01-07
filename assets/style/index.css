@@ -1,0 +1,28 @@
+* {
+  @apply scroll-smooth;
+}
+
+.el-popper {
+  @apply bg-slate-50 shadow border border-slate-300 text-base font-sans text-black !important;
+}
+
+.el-popper__arrow {
+  @apply hidden;
+}
+
+.el-dialog {
+  @apply bg-slate-50 shadow border border-slate-300 text-base font-sans text-black !important;
+}
+
+.el-dialog__header {
+  @apply !break-normal;
+}
+
+.el-button {
+  @apply text-base font-sans !important;
+}
+
+.icon-button {
+  @apply p-2 transition rounded-full cursor-pointer w-fit
+  hover:text-slate-800 hover:bg-slate-200 active:text-slate-700 active:bg-slate-300;
+}

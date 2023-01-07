@@ -1,5 +1,5 @@
-import { Operator } from "~~/utils/model/supply";
-import { AllowedOperator } from "./model/allowed";
+import { Operator } from "~~/utils/model/supply/supplyItem";
+import { AllowedOperator } from "./model/allowedSupply/allowedSupplyItem";
 
 export function mapOperator(operator: AllowedOperator.ONE_OF | AllowedOperator.MANY_OF | AllowedOperator.BETWEEN) {
   if (operator === AllowedOperator.ONE_OF)

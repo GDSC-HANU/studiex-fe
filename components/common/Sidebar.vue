@@ -1,17 +1,32 @@
 <template>
-	<div :class="`relative bg-slate-800 text-slate-50 h-full transition-all ${isCollapsed ? 'w-14' : 'w-60'}`">
+	<div :class="`relative bg-slate-800 text-slate-50 h-full transition-all ${isCollapsed ? 'w-14' : 'w-48'}`">
 		<div class="bg-slate-900 h-14 flex items-center p-2 mb-2">
-			<el-image class="block h-full" src="../../assets/imgs/Tailwind_logo.png" :fit="`fill`" />
+			<el-image
+				class="block h-full"
+				src="/imgs/Tailwind_logo.png"
+				:fit="`fill`"
+			/>
 			<h1 class="grow text-center text-xl" v-show="!isCollapsed">StudyEX</h1>
 		</div>
 		<ul>
 			<template v-for="(route, index) in sidebar">
 				<ClientOnly>
-					<el-tooltip :content="route.name" placement="right" :disabled="!isCollapsed" :show-after="200" :hide-after="100">
-						<NuxtLink :to="route.path" :class="`m-2 p-2 rounded-lg flex items-center cursor-pointer hover:bg-slate-900 transition
-						${index === currentRoute ? 'bg-slate-900 text-slate-50' : 'text-slate-300'}`">
+					<el-tooltip
+						:content="route.name"
+						placement="right"
+						:disabled="!isCollapsed"
+						:show-after="200"
+						:hide-after="100"
+					>
+						<NuxtLink
+							:to="route.path"
+							:class="`m-2 p-2 rounded-lg flex items-center cursor-pointer hover:bg-slate-900 transition
+							${index === currentRoute ? 'bg-slate-900 text-slate-50 shadow' : 'text-slate-300'}`">
 							<i v-html="route.icon"></i>
-							<span class="ml-3" v-show="!isCollapsed">{{ route.name }}</span>
+							<span
+								class="ml-3"
+								v-show="!isCollapsed"
+							>{{ route.name }}</span>
 						</NuxtLink>
 					</el-tooltip>
 				</ClientOnly>
@@ -29,8 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ElImage, ElTooltip, ElButton } from 'element-plus'
-import { ArrowLeft } from '@element-plus/icons-vue';
+import { ElImage, ElTooltip } from 'element-plus'
 import { PropType } from 'vue';
 
 const isCollapsed = ref(false)

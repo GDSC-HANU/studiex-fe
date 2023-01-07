@@ -1,7 +1,7 @@
 <template>
 	<div :class="`relative bg-slate-800 text-slate-50 h-full transition-all`">
 		<div class="bg-slate-900 h-14 flex items-center p-2 mb-2">
-			<el-image class="block h-full" src="../../assets/imgs/Tailwind_logo.png" :fit="`fill`" />
+			<el-image class="block h-full" src="/imgs/Tailwind_logo.png" :fit="`fill`" />
 			<h1 class="grow text-center text-xl">StudieX</h1>
 		</div>
 		<ul>
@@ -17,8 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ElImage, ElTooltip, ElButton } from 'element-plus'
-import { ArrowLeft } from '@element-plus/icons-vue';
+import { ElImage } from 'element-plus'
 import { PropType } from 'vue';
 
 const route = useRoute()

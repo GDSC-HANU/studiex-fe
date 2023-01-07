@@ -2,6 +2,7 @@ import ElementPlus from 'unplugin-element-plus/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    css: ["@/assets/style/index.css"],
     modules: [
         '@nuxtjs/tailwindcss',
         [
@@ -13,9 +14,9 @@ export default defineNuxtConfig({
     ],
     runtimeConfig: {
         public: {
-            severProtocol: '',
-            severDomain: '',
-            severPort: ''
+            severProtocol: process.env.NUXT_PUBLIC_SEVER_PROTOCOL,
+            severDomain: process.env.NUXT_PUBLIC_SEVER_DOMAIN,
+            severPort: process.env.NUXT_PUBLIC_SEVER_PORT
         }
     },
     build: {
