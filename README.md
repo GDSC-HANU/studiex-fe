@@ -78,6 +78,10 @@ Once you have finished, create a pull request at the pull request tab in project
 You need to update your local `develop` branch.
 
 And it's safe to delete `your_feature` branch on both local and remote
+    ```
+    git checkout develop
+    git branch -d your_feature
+    ```
 ## Testing
 
 ## Deployment
