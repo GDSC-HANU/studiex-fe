@@ -22,9 +22,7 @@
 ### 📄 New project
 *Please follow this guild to have project ready for develop.*
 
-*Oh, and you must have node latest version installed.*
-
-1. Clone the development branch of this project
+1. Clone the `develop` branch of this project
     ```
     git clone -b develop https://github.com/GDSC-HANU/StudyEx.git
     ```
@@ -42,7 +40,34 @@
     ```
     yarn dev
     ```
-### 📑 Update Project
+### 📑 Update project
+*Should be done frequently*
+1. Pull the newest version of project from `develop` branch
+    ```
+    git pull origin develop
+    ```
+2. Pull the feature you (and other team members) are develop
+    ```
+    git pull origin your_feature
+    ```
+### 📑 Start a new feature
+1. Create new branch
+    ```
+    git checkout develop
+    git branch your_feature
+    git checkout your_feature
+    ```
+2. Star committing. Remember to update your local frequently if the branch you are working on have 2 or more members
+3. Push to remote
+    ```
+    git push origin your_feature
+    ```
+### 📑 Create pull request
+Once you have finished, create a pull request at the pull request tab in project and your feature will be merge to `develop` branch.
+
+You need to update your local `develop` branch.
+
+And it's safe to delete `your_feature` branch on both local and remote
 ## Testing
 
 ## Deployment
