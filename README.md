@@ -40,6 +40,7 @@
     ```
     yarn dev
     ```
+
 ### 📑 Update project
 *Should be done frequently*
 1. Pull the newest version of project from `develop` branch
@@ -50,7 +51,11 @@
     ```
     git pull origin your_feature
     ```
+
 ### 📑 Start a new feature
+
+#### <span style="border-radius: 5px;padding: 5px;color: red;background: rgba(255, 0, 0, 0.2)">❗Do not modify develop branch, it will not be save</span>
+
 1. Create new branch
     ```
     git checkout develop
@@ -62,6 +67,11 @@
     ```
     git push origin your_feature
     ```
+    *Note that if you push the branch for the first time, you will need to push and create branch on remote at the same time*
+    ```
+    git push --set-upstream origin your_feature
+    ```
+
 ### 📑 Create pull request
 Once you have finished, create a pull request at the pull request tab in project and your feature will be merge to `develop` branch.
 
